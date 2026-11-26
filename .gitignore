@@ -1,3 +1,15 @@
 node_modules/
 *.log
 .DS_Store
+Thumbs.db
+
+# Локальные резервные копии и внутренние материалы
+backup/
+docs/internal/
+docs/design-preview.html
+
+# Локальное окружение; публичный шаблон содержит только примеры
+.env
+.env.*
+!.env.example
+mise.local.toml

@@ -14,7 +14,7 @@
 | [robots.txt](../robots.txt) | Правила обхода и ссылка на sitemap. |
 | [sitemap.xml](../sitemap.xml) | Карта сайта с URL `https://exprofit.by/`. |
 
-На хостинг не загружаются `docs/`, `src/`, `tests/`, `node_modules/`, `README.md`, `AGENTS.md`, резервные копии из `backup/` и служебные файлы, включая `.git/`, `.gitignore`, `package.json` и `package-lock.json`. Не переносите корень проекта целиком. Прототип и контентная основа не входят в поставку сайта; это не ограничивает доступ к файлам, включённым в публичный Git-репозиторий.
+На хостинг не загружаются `docs/`, `src/`, `tests/`, `node_modules/`, `README.md`, `AGENTS.md`, резервные копии из `backup/` и служебные файлы, включая `.git/`, `.gitignore`, `package.json` и `package-lock.json`. Не переносите корень проекта целиком. Публичная контентная основа `docs/CONTENT.md`, локальные редакционные материалы `docs/internal/EDITORIAL.md` и прототип `docs/internal/design-preview.html` не входят в поставку сайта. Правила хранения в публичном репозитории описаны в [docs/README.md](README.md#правила-хранения); исключение из поставки не ограничивает доступ к уже опубликованным файлам и истории Git.
 
 ## Подготовка
 
