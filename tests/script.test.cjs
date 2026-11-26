@@ -88,7 +88,7 @@ test('home and nested CRM landing links preserve five UTM keys on a round trip',
     assert.equal(result.searchParams.get('view'), 'cases');
 });
 
-test('CRM directory URL maps to its HTML with working shared assets and consistent SEO', () => {
+test('CRM directory URL maps to its HTML with working assets, neutral SEO and hero copy', () => {
     const pageURL = new URL('https://exprofit.by/crm-automation/');
     const html = fs.readFileSync(path.join(__dirname, '..', pageURL.pathname, 'index.html'), 'utf8');
     const cssURL = new URL(html.match(/rel="stylesheet" href="([^"]+)"/)[1], pageURL);
@@ -100,6 +100,15 @@ test('CRM directory URL maps to its HTML with working shared assets and consiste
     }
     assert.equal(html.match(/rel="canonical" href="([^"]+)"/)[1], pageURL.href);
     assert.equal(html.match(/property="og:url" content="([^"]+)"/)[1], pageURL.href);
+    const title = 'Автоматизация CRM и интеграции на Python | ExProfit';
+    const description = 'Связываю CRM с внешними сервисами на Python: обмен данными, выгрузки и уведомления для бизнеса. Обсудите задачу с Андреем Коробейниковым в Telegram.';
+    assert.equal(html.match(/<title>([^<]+)<\/title>/)[1], title);
+    assert.equal(html.match(/property="og:title" content="([^"]+)"/)[1], title);
+    assert.equal(html.match(/name="description" content="([^"]+)"/)[1], description);
+    assert.equal(html.match(/property="og:description" content="([^"]+)"/)[1], description);
+    const hero = html.match(/<section class="hero wrap"[^>]*>[\s\S]*?<\/section>/)[0];
+    assert.equal(hero.match(/<p class="name">([^<]+)<\/p>/)[1], 'Андрей Коробейников · Python-разработка для бизнеса');
+    assert.doesNotMatch(hero, /беларус|belarus/i);
     const sitemap = fs.readFileSync(path.join(__dirname, '../sitemap.xml'), 'utf8');
     assert.ok(sitemap.includes(`<loc>${pageURL.href}</loc>`));
     assert.equal(sitemap.includes('/crm-automation.html'), false);
