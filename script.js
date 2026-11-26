@@ -1,92 +1,57 @@
-// Скрипт для плавной прокрутки с учетом фиксированного хедера
-function initSmoothScroll() {
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            e.preventDefault();
-            const target = document.querySelector(this.getAttribute('href'));
-            if (target) {
-                const headerHeight = document.querySelector('header').offsetHeight;
-                const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - headerHeight;
+const UTM_KEYS = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content'];
 
-                window.scrollTo({
-                    top: targetPosition,
-                    behavior: 'smooth'
-                });
-            }
-        });
-    });
-}
+function getUTMParams(search) {
+    const source = new URLSearchParams(search);
+    const utm = new URLSearchParams();
 
-// Скрипт для отправки UTM параметров в ТГ
-async function sendUTMToTelegram(buttonType) {
-    const urlParams = new URLSearchParams(window.location.search);
-    const utmData = {
-        button: buttonType,
-        url: window.location.href,
-        utm_source: urlParams.get('utm_source'),
-        utm_medium: urlParams.get('utm_medium'),
-        utm_campaign: urlParams.get('utm_campaign'),
-        utm_term: urlParams.get('utm_term'),
-        utm_content: urlParams.get('utm_content')
-    };
-
-    try {
-        // Используйте вашу ссылку из Google Apps Script
-        await fetch('https://script.google.com/macros/s/AKfycbyjm87AdhFjsGdiioe3u8xJiuvnQkVl8D_CBH6VSfyfrtR4xNwelbUawNPDey1k73tmlg/exec', {
-            method: 'POST',
-            body: JSON.stringify(utmData)
-        });
-    } catch (error) {
-        console.log('Ошибка отправки UTM:', error);
+    for (const key of UTM_KEYS) {
+        if (source.has(key)) utm.set(key, source.get(key));
     }
 
-    return true;
+    return utm;
 }
 
-// Скрипт для сохранения UTM параметров
-function handleInternalLinks() {
-    document.addEventListener('click', function(e) {
-        const link = e.target.closest('a');
-        if (!link) return;
+// Analytics is optional: the CTA remains a normal Telegram link.
+async function sendUTMToTelegram(buttonType) {
+    try {
+        const utm = getUTMParams(window.location.search);
+        const pageURL = new URL(window.location.href);
+        pageURL.search = utm.toString();
+        const utmData = {
+            button: buttonType,
+            url: pageURL.href,
+            ...Object.fromEntries(UTM_KEYS.map(key => [key, utm.get(key)]))
+        };
 
-        const href = link.getAttribute('href');
+        await fetch('https://script.google.com/macros/s/AKfycbyjm87AdhFjsGdiioe3u8xJiuvnQkVl8D_CBH6VSfyfrtR4xNwelbUawNPDey1k73tmlg/exec', {
+            method: 'POST',
+            body: JSON.stringify(utmData),
+            keepalive: true
+        });
+    } catch {
+        // Network or analytics failures must never interrupt contact navigation.
+    }
+}
 
-        // Обрабатываем только внутренние ссылки
-        if (href && (href.startsWith('/') || href.startsWith('#'))) {
-            e.preventDefault();
+function preserveUTM(link) {
+    const href = link.getAttribute('href');
+    // Native fragment navigation already keeps the current query and moves focus.
+    if (!href || href.startsWith('#')) return;
 
-            const urlParams = new URLSearchParams(window.location.search);
-            const utmParams = urlParams.toString();
+    const url = new URL(href, window.location.href);
+    if (url.origin !== window.location.origin || !['http:', 'https:'].includes(url.protocol)) return;
 
-            let newUrl = href;
+    for (const [key, value] of getUTMParams(window.location.search)) {
+        if (!url.searchParams.has(key)) url.searchParams.set(key, value);
+    }
+    link.setAttribute('href', url.href);
+}
 
-            // Для якорных ссылок
-            if (href.startsWith('#')) {
-                const target = document.querySelector(href);
-                if (target) {
-                    const headerHeight = document.querySelector('header').offsetHeight;
-                    const targetPosition = target.offsetTop - headerHeight;
-
-                    window.scrollTo({
-                        top: targetPosition,
-                        behavior: 'smooth'
-                    });
-
-                    newUrl = window.location.pathname + (utmParams ? '?' + utmParams : '') + href;
-                    window.history.replaceState(null, null, newUrl);
-                }
-            }
-            // Для ссылок на главную и другие страницы
-            else if (href.startsWith('/')) {
-                newUrl = href + (utmParams ? '?' + utmParams : '');
-                window.location.href = newUrl;
-            }
-        }
+document.addEventListener('DOMContentLoaded', function () {
+    // Prepare hrefs for keyboard activation, middle-click and context-menu opening.
+    document.querySelectorAll('a[href]').forEach(preserveUTM);
+    document.addEventListener('click', function (event) {
+        const link = event.target.closest('a[href]');
+        if (link) preserveUTM(link);
     });
-}
-
-// Инициализация всех скриптов
-document.addEventListener('DOMContentLoaded', function() {
-    initSmoothScroll();
-    handleInternalLinks();
 });

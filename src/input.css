@@ -1,0 +1,29 @@
+@import "tailwindcss" source(none);
+
+@source "../index.html";
+@source "../script.js";
+
+/* Keep anchor targets and keyboard focus clear of the fixed header. */
+[id],
+a {
+    scroll-margin-top: 5rem;
+}
+
+a:focus-visible {
+    outline: 3px solid var(--color-blue-800);
+    outline-offset: 4px;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    html {
+        scroll-behavior: smooth;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        transition-duration: 0s !important;
+    }
+}

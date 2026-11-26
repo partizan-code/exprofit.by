@@ -1,6 +1,7 @@
 <!DOCTYPE html>
-<html lang="ru" class="scroll-smooth">
+<html lang="ru" prefix="og: https://ogp.me/ns#">
 <head>
+    <meta charset="UTF-8">
     <!-- Yandex.Metrika counter -->
     <script type="text/javascript">
         (function(m,e,t,r,i,k,a){
@@ -12,19 +13,23 @@
 
         ym(105367139, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", accurateTrackBounce:true, trackLinks:true});
     </script>
-    <noscript><div><img src="https://mc.yandex.ru/watch/105367139" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
     <!-- /Yandex.Metrika counter -->
-    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="yandex-verification" content="69aa97f8b82d53fe">
     <meta name="description" content="Разработка Telegram-ботов, парсеров сайтов, алгоритмов торговли и скриптов на Python. Автоматизация бизнес-процессов под ключ.">
     <meta property="og:title" content="ExProfit - Python разработчик">
     <meta property="og:description" content="Разработка Telegram-ботов, парсеров сайтов, алгоритмов торговли">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://exprofit.by/">
+    <meta property="og:site_name" content="ExProfit">
+    <meta property="og:locale" content="ru_RU">
+    <link rel="canonical" href="https://exprofit.by/">
     <title>ExProfit - Python разработчик</title>
     <link href="output.css" rel="stylesheet">
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐍</text></svg>">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%20100%20100'%3E%3Ctext%20y%3D'.9em'%20font-size%3D'90'%3E%F0%9F%90%8D%3C%2Ftext%3E%3C%2Fsvg%3E">
 </head>
 <body class="bg-gray-100 min-h-screen">
+    <noscript><div><img src="https://mc.yandex.ru/watch/105367139" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
 
     <!-- Заголовок -->
     <header class="fixed top-0 left-0 right-0 bg-white text-gray-700 py-3 shadow-xl z-50">
@@ -46,16 +51,8 @@
             </p>
             <!-- Контейнер для кнопок -->
             <div class="flex flex-col sm:flex-row justify-center py-3 gap-4">
-                <a href="https://t.me/korobey" target="_blank" rel="noopener noreferrer" onclick="sendUTMToTelegram('Обсудить проект')">
-                    <button class="bg-blue-500 text-white px-8 py-3 rounded-lg hover:bg-blue-600 transition font-semibold min-w-[200px]" aria-label="Обсудить проект">
-                        Обсудить проект
-                    </button>
-                </a>
-                <a href="#portfolio">
-                    <button class="bg-gray-500 text-white px-8 py-3 rounded-lg hover:bg-gray-600 transition font-semibold min-w-[200px]" aria-label="Смотреть кейсы">
-                        Смотреть кейсы
-                    </button>
-                </a>
+                <a href="https://t.me/korobey" target="_blank" rel="noopener noreferrer" onclick="sendUTMToTelegram('Обсудить проект')" class="inline-block self-center text-center bg-blue-500 text-white px-8 py-3 rounded-lg hover:bg-blue-600 transition font-semibold min-w-[200px]">Обсудить проект</a>
+                <a href="#portfolio" class="inline-block self-center text-center bg-gray-500 text-white px-8 py-3 rounded-lg hover:bg-gray-600 transition font-semibold min-w-[200px]">Смотреть кейсы</a>
             </div>
         </section>
 
@@ -69,22 +66,22 @@
 
             <!-- Карточки -->
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 py-5 mb-5">
-                <div class="bg-gray-300 rounded-lg shadow-md p-6 transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
+                <div class="bg-gray-300 rounded-lg shadow-md p-6 transition-all duration-300 hover:shadow-xl motion-safe:hover:-translate-y-1">
                     <h3 class="text-2xl font-semibold text-center mb-4">Телеграмм боты</h3>
                     <p class="text-gray-700 text-center">Интеллектуальные Telegram-боты для автоматизации бизнес-процессов и онлайн-продаж. Боты для обработки заказов, рассылки уведомлений, сбора данных и интеграции с внешними системами.</p>
                 </div>
 
-                <div class="bg-gray-300 rounded-lg shadow-md p-6 transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
+                <div class="bg-gray-300 rounded-lg shadow-md p-6 transition-all duration-300 hover:shadow-xl motion-safe:hover:-translate-y-1">
                     <h3 class="text-2xl font-semibold text-center mb-4">Парсеры сайтов</h3>
                     <p class="text-gray-700 text-center">Мощные парсеры для автоматического сбора и структурирования данных с веб-сайтов. Сбор контента, мониторинг цен, анализ конкурентов и экспорт данных для дальнейшей аналитики.</p>
                 </div>
 
-                <div class="bg-gray-300 rounded-lg shadow-md p-6 transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
+                <div class="bg-gray-300 rounded-lg shadow-md p-6 transition-all duration-300 hover:shadow-xl motion-safe:hover:-translate-y-1">
                     <h3 class="text-2xl font-semibold text-center mb-4">Алготрейдинг</h3>
                     <p class="text-gray-700 text-center">Алгоритмические торговые боты для автоматизации торговли на финансовых рынках. Тестеры стратегий для бэктестинга, системы управления рисками и решения для высокочастотной торговли.</p>
                 </div>
 
-                <div class="bg-gray-300 rounded-lg shadow-md p-6 transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
+                <div class="bg-gray-300 rounded-lg shadow-md p-6 transition-all duration-300 hover:shadow-xl motion-safe:hover:-translate-y-1">
                     <h3 class="text-2xl font-semibold text-center mb-4">Скрипты</h3>
                     <p class="text-gray-700 text-center">Кастомные скрипты любой сложности для автоматизации рутинных операций и бизнес-процессов. Решения для обработки данных, интеграции API и управления файлами.</p>
                 </div>
@@ -92,7 +89,7 @@
         </section>
 
         <!-- Секция с заголовком и карточками -->
-        <section id="portfolio" class="">
+        <section id="portfolio">
             <!-- Заголовок секции -->
             <div class="text-center mb-5">
                 <h2 class="text-3xl md:text-5xl font-semibold text-gray-800 mb-4">Мои кейсы</h2>
@@ -107,61 +104,37 @@
                 <div class="bg-white rounded-lg shadow-md p-6 flex flex-col items-center">
                     <h3 class="text-2xl font-semibold text-center mb-4">Бот аренды кабинетов в салоне красоты</h3>
                     <p class="text-gray-600 text-center mb-5">Разгрузил работу администратора на 80%. Бот - помощник администратора салона красоты. Информация о свободных слотах. Удобный интерактивный календарь. Уведомления клиентов о записях.</p>
-                    <a href="https://t.me/exscreener_bot" target="_blank" rel="noopener noreferrer" class="w-full mt-auto">
-                        <button class="bg-white text-blue-500 border-2 border-blue-500 px-8 py-3 rounded-lg hover:bg-blue-50 transition font-semibold w-full" aria-label="Посмотреть">
-                        Посмотреть
-                        </button>
-                    </a>
+                    <a href="https://t.me/exscreener_bot" target="_blank" rel="noopener noreferrer" class="inline-block text-center w-full mt-auto bg-white text-blue-500 border-2 border-blue-500 px-8 py-3 rounded-lg hover:bg-blue-50 transition font-semibold" aria-label="Посмотреть: Бот аренды кабинетов в салоне красоты">Посмотреть</a>
                 </div>
 
                 <div class="bg-white rounded-lg shadow-md p-6 flex flex-col items-center">
                     <h3 class="text-2xl font-semibold text-center mb-4">Бот для скачивания видео и фото из соц.сетей</h3>
                     <p class="text-gray-600 text-center mb-5">Бот скачивает видео и фото контент из социальных сетей Instagram, TikTok, X, YouTube, Facebook. Убирает водяные знаки. Есть возможность выбрать формат видео для сохранения.</p>
-                    <a href="https://t.me/Pon4hBot" target="_blank" rel="noopener noreferrer" class="w-full mt-auto">
-                        <button class="bg-white text-blue-500 border-2 border-blue-500 px-8 py-3 rounded-lg hover:bg-blue-50 transition font-semibold w-full" aria-label="Посмотреть">
-                        Посмотреть
-                        </button>
-                    </a>
+                    <a href="https://t.me/Pon4hBot" target="_blank" rel="noopener noreferrer" class="inline-block text-center w-full mt-auto bg-white text-blue-500 border-2 border-blue-500 px-8 py-3 rounded-lg hover:bg-blue-50 transition font-semibold" aria-label="Посмотреть: Бот для скачивания видео и фото из соц.сетей">Посмотреть</a>
                 </div>
 
                 <div class="bg-white rounded-lg shadow-md p-6 flex flex-col items-center">
                     <h3 class="text-2xl font-semibold text-center mb-4">Криптовалютный сканер биржи Binance</h3>
                     <p class="text-gray-600 text-center mb-5">Сканер в реальном времени мониторит все торговые пары биржи Binance, находит аномальную активность и мгновенно отправляет ссылку и график монеты с аналитикой  в Телеграмм-канал.</p>
-                    <a href="https://t.me/CoinRadar24" target="_blank" rel="noopener noreferrer" class="w-full mt-auto">
-                        <button class="bg-white text-blue-500 border-2 border-blue-500 px-8 py-3 rounded-lg hover:bg-blue-50 transition font-semibold w-full" aria-label="Посмотреть">
-                        Посмотреть
-                        </button>
-                    </a>
+                    <a href="https://t.me/CoinRadar24" target="_blank" rel="noopener noreferrer" class="inline-block text-center w-full mt-auto bg-white text-blue-500 border-2 border-blue-500 px-8 py-3 rounded-lg hover:bg-blue-50 transition font-semibold" aria-label="Посмотреть: Криптовалютный сканер биржи Binance">Посмотреть</a>
                 </div>
 
                 <div class="bg-white rounded-lg shadow-md p-6 flex flex-col items-center">
                     <h3 class="text-2xl font-semibold text-center mb-4">Скринер криптовалютной биржи ByBit</h3>
                     <p class="text-gray-600 text-center mb-5">Бот мониторит все торговые пары на бирже Bybit и выводит те, которые удовлетворяют вашим настройкам (изменение цены в % за 24 часа и объем торгов) Есть рассылка со списком монет.</p>
-                    <a href="https://t.me/exprofit_screener_bybit_bot" target="_blank" rel="noopener noreferrer" class="w-full mt-auto">
-                        <button class="bg-white text-blue-500 border-2 border-blue-500 px-8 py-3 rounded-lg hover:bg-blue-50 transition font-semibold w-full" aria-label="Посмотреть">
-                        Посмотреть
-                        </button>
-                    </a>
+                    <a href="https://t.me/exprofit_screener_bybit_bot" target="_blank" rel="noopener noreferrer" class="inline-block text-center w-full mt-auto bg-white text-blue-500 border-2 border-blue-500 px-8 py-3 rounded-lg hover:bg-blue-50 transition font-semibold" aria-label="Посмотреть: Скринер криптовалютной биржи ByBit">Посмотреть</a>
                 </div>
 
                 <div class="bg-white rounded-lg shadow-md p-6 flex flex-col items-center">
                     <h3 class="text-2xl font-semibold text-center mb-4">Парсер сайта недвижимости Kufar</h3>
                     <p class="text-gray-600 text-center mb-5">Парсер находит все новые объявления о сдаче квартир в аренду в 5 областных центрах Беларуси и сразу отправляет их в ТГ каналы. Полезный инструмент для тех, кто хочет быстро арендовать квартиру.</p>
-                    <a href="https://t.me/realt_by_gomel" target="_blank" rel="noopener noreferrer" class="w-full mt-auto">
-                        <button class="bg-white text-blue-500 border-2 border-blue-500 px-8 py-3 rounded-lg hover:bg-blue-50 transition font-semibold w-full" aria-label="Посмотреть">
-                        Посмотреть
-                        </button>
-                    </a>
+                    <a href="https://t.me/realt_by_gomel" target="_blank" rel="noopener noreferrer" class="inline-block text-center w-full mt-auto bg-white text-blue-500 border-2 border-blue-500 px-8 py-3 rounded-lg hover:bg-blue-50 transition font-semibold" aria-label="Посмотреть: Парсер сайта недвижимости Kufar">Посмотреть</a>
                 </div>
 
                 <div class="bg-white rounded-lg shadow-md p-6 flex flex-col items-center">
                     <h3 class="text-2xl font-semibold text-center mb-4">Бот парсер автоматически ведет 50+ ТГ каналов</h3>
                     <p class="text-gray-600 text-center mb-5">Бот парсит Телеграмм каналы источники, извлекает из них новые посты, очищает от рекламы, форматирует и отправляет в каналы пользователя. Полная автоматизация ведения 50+ ТГ каналов.</p>
-                    <a href="https://t.me/addlist/-QrkFDQYgX4wODIy" target="_blank" rel="noopener noreferrer" class="w-full mt-auto">
-                        <button class="bg-white text-blue-500 border-2 border-blue-500 px-8 py-3 rounded-lg hover:bg-blue-50 transition font-semibold w-full" aria-label="Посмотреть">
-                        Посмотреть
-                        </button>
-                    </a>
+                    <a href="https://t.me/addlist/-QrkFDQYgX4wODIy" target="_blank" rel="noopener noreferrer" class="inline-block text-center w-full mt-auto bg-white text-blue-500 border-2 border-blue-500 px-8 py-3 rounded-lg hover:bg-blue-50 transition font-semibold" aria-label="Посмотреть: Бот парсер автоматически ведет 50+ ТГ каналов">Посмотреть</a>
                 </div>
             </div>
         </section>
@@ -207,17 +180,13 @@
 
         <!-- Герой секция -->
         <section class="text-center py-3">
-            <h1 class="text-3xl md:text-5xl font-semibold text-gray-800 mt-8 mb-8">Готовы автоматизировать Вашу рутину?</h1>
+            <h2 class="text-3xl md:text-5xl font-semibold text-gray-800 mt-8 mb-8">Готовы автоматизировать Вашу рутину?</h2>
             <p class="text-lg md:text-2xl text-gray-600 max-w-4xl mx-auto mb-6">
                 Напишите мне в Телеграмм, чтобы обсудить Вашу задачу и получить расчет стоимости за 15 минут.
             </p>
             <!-- Контейнер для кнопок -->
             <div class="flex flex-col sm:flex-row justify-center py-3 gap-4">
-                <a href="https://t.me/korobey" target="_blank" rel="noopener noreferrer" onclick="sendUTMToTelegram('Написать в Телеграмм')">
-                    <button class="bg-blue-500 text-white px-8 py-3 rounded-lg hover:bg-blue-600 transition font-semibold min-w-[200px]" aria-label="Написать в Телеграмм">
-                        Написать в Телеграмм
-                    </button>
-                </a>
+                <a href="https://t.me/korobey" target="_blank" rel="noopener noreferrer" onclick="sendUTMToTelegram('Написать в Телеграмм')" class="inline-block self-center text-center bg-blue-500 text-white px-8 py-3 rounded-lg hover:bg-blue-600 transition font-semibold min-w-[200px]">Написать в Телеграмм</a>
             </div>
         </section>
     </main>
