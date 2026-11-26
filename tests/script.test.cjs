@@ -119,15 +119,17 @@ test('CRM directory URL maps to its HTML with working assets, neutral SEO and he
     assert.ok(imageAlt.includes('Андрея Коробейникова'));
     assert.equal(html.match(/name="twitter:image:alt" content="([^"]+)"/)[1], imageAlt);
     assert.ok(fs.statSync(path.join(__dirname, '..', new URL(imageURL).pathname)).isFile());
-    for (const [filename, url] of [['index.html', 'https://exprofit.by/'], ['crm-automation/index.html', pageURL]]) {
-        const page = fs.readFileSync(path.join(__dirname, '..', filename), 'utf8');
-        const photo = page.match(/<img class="author-photo"[^>]+>/)[0];
-        const photoURL = new URL(photo.match(/src="([^"]+)"/)[1], url);
-        assert.equal(photoURL.pathname, '/assets/images/andrey-korobeynikov.webp');
-        assert.match(photo, /alt="Андрей Коробейников"/);
-        assert.match(photo, /width="384" height="384"/);
-        assert.ok(fs.statSync(path.join(__dirname, '..', photoURL.pathname)).isFile());
-    }
+    const home = fs.readFileSync(path.join(__dirname, '../index.html'), 'utf8');
+    const about = home.match(/<section[^>]+id="about"[^>]*>[\s\S]*?<\/section>/)[0];
+    const photo = about.match(/<img class="author-photo"[^>]+>/)[0];
+    const photoURL = new URL(photo.match(/src="([^"]+)"/)[1], 'https://exprofit.by/');
+    assert.equal(photoURL.pathname, '/assets/images/andrey-korobeynikov.webp');
+    assert.match(photo, /alt="Андрей Коробейников"/);
+    assert.match(photo, /width="384" height="384"/);
+    assert.ok(fs.statSync(path.join(__dirname, '..', photoURL.pathname)).isFile());
+    assert.equal(home.match(/<img class="author-photo"/g).length, 1);
+    assert.doesNotMatch(home.match(/<section class="hero wrap"[^>]*>[\s\S]*?<\/section>/)[0], /<img\b/);
+    assert.doesNotMatch(html, /<img[^>]+andrey-korobeynikov\.webp/);
     const hero = html.match(/<section class="hero wrap"[^>]*>[\s\S]*?<\/section>/)[0];
     assert.equal(hero.match(/<p class="name">([^<]+)<\/p>/)[1], 'Андрей Коробейников · Python-разработка для бизнеса');
     assert.doesNotMatch(hero, /беларус|belarus/i);

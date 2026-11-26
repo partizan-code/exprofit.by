@@ -43,8 +43,6 @@ nav a{display:inline-flex;align-items:center;min-height:44px;font-size:.875rem;t
 
 .hero{padding-top:44px;padding-bottom:48px}
 .hero-topline{display:flex;justify-content:space-between;align-items:start;gap:24px;margin-bottom:24px}
-.author{display:flex;align-items:center;gap:20px;min-width:0}
-.author-photo{display:block;width:96px;height:96px;aspect-ratio:1;object-fit:cover;object-position:center;flex-shrink:0;border-radius:0}
 .name{font-size:1rem}
 .position{max-width:42ch;color:var(--muted);font: .875rem/1.75 var(--mono);text-align:right}
 .hero h1{max-width:1040px;font-size:clamp(2.125rem,1.25rem + 2.8vw,3.75rem);line-height:1.12;letter-spacing:-.04em}
@@ -106,6 +104,7 @@ nav a{display:inline-flex;align-items:center;min-height:44px;font-size:.875rem;t
 
 .about{display:grid;grid-template-columns:.8fr 1.4fr;gap:64px}
 .about h2{max-width:15ch}
+.author-photo{display:block;width:96px;height:96px;margin-top:24px;aspect-ratio:1;object-fit:cover;object-position:center;border-radius:0}
 .about-copy p{color:var(--muted);margin-bottom:20px}
 .about-copy p:first-child{color:var(--text);font-size:1.25rem;line-height:1.6}
 .about .project-link{margin-top:0}
@@ -143,7 +142,6 @@ footer{padding-block:28px;color:var(--muted)}
 nav{order:3;width:100%;margin-left:0;justify-content:space-between;gap:12px}
 .hero{padding-top:24px;padding-bottom:32px}
 .hero-topline{display:block;margin-bottom:18px}
-.author{gap:16px}
 .author-photo{width:64px;height:64px}
 .position{display:none}
 .hero h1{font-size:clamp(2.125rem,1.25rem + 3vw,3.25rem)}
