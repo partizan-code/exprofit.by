@@ -106,6 +106,28 @@ test('CRM directory URL maps to its HTML with working assets, neutral SEO and he
     assert.equal(html.match(/property="og:title" content="([^"]+)"/)[1], title);
     assert.equal(html.match(/name="description" content="([^"]+)"/)[1], description);
     assert.equal(html.match(/property="og:description" content="([^"]+)"/)[1], description);
+    assert.equal(html.match(/name="twitter:card" content="([^"]+)"/)[1], 'summary_large_image');
+    assert.equal(html.match(/name="twitter:title" content="([^"]+)"/)[1], title);
+    assert.equal(html.match(/name="twitter:description" content="([^"]+)"/)[1], description);
+    const imageURL = 'https://exprofit.by/assets/images/crm-automation-og.jpg';
+    assert.equal(html.match(/property="og:image" content="([^"]+)"/)[1], imageURL);
+    assert.equal(html.match(/name="twitter:image" content="([^"]+)"/)[1], imageURL);
+    assert.equal(html.match(/property="og:image:type" content="([^"]+)"/)[1], 'image/jpeg');
+    assert.equal(html.match(/property="og:image:width" content="([^"]+)"/)[1], '1200');
+    assert.equal(html.match(/property="og:image:height" content="([^"]+)"/)[1], '630');
+    const imageAlt = html.match(/property="og:image:alt" content="([^"]+)"/)[1];
+    assert.ok(imageAlt.includes('Андрея Коробейникова'));
+    assert.equal(html.match(/name="twitter:image:alt" content="([^"]+)"/)[1], imageAlt);
+    assert.ok(fs.statSync(path.join(__dirname, '..', new URL(imageURL).pathname)).isFile());
+    for (const [filename, url] of [['index.html', 'https://exprofit.by/'], ['crm-automation/index.html', pageURL]]) {
+        const page = fs.readFileSync(path.join(__dirname, '..', filename), 'utf8');
+        const photo = page.match(/<img class="author-photo"[^>]+>/)[0];
+        const photoURL = new URL(photo.match(/src="([^"]+)"/)[1], url);
+        assert.equal(photoURL.pathname, '/assets/images/andrey-korobeynikov.webp');
+        assert.match(photo, /alt="Андрей Коробейников"/);
+        assert.match(photo, /width="384" height="384"/);
+        assert.ok(fs.statSync(path.join(__dirname, '..', photoURL.pathname)).isFile());
+    }
     const hero = html.match(/<section class="hero wrap"[^>]*>[\s\S]*?<\/section>/)[0];
     assert.equal(hero.match(/<p class="name">([^<]+)<\/p>/)[1], 'Андрей Коробейников · Python-разработка для бизнеса');
     assert.doesNotMatch(hero, /беларус|belarus/i);
