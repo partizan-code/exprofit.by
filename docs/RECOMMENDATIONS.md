@@ -23,7 +23,7 @@
 
 ## SEO и представление ссылок
 
-Уже реализованы `title`, `description`, canonical, текстовые Open Graph metadata, подтверждение Яндекса, `robots.txt` и sitemap с главной страницей. Основной HTML не содержит `noindex`. Дальнейшие шаги:
+Уже реализованы `title`, `description`, canonical, текстовые Open Graph metadata, подтверждение Яндекса, `robots.txt` и sitemap с главной и посадочной CRM-страницей. Основной HTML не содержит `noindex`. Дальнейшие шаги:
 
 - Подготовить согласованное изображение для `og:image`, затем проверить карточку ссылки. Изображение входит в базовые свойства [Open Graph protocol](https://ogp.me/); сейчас в HTML его нет.
 - Решить, нужна ли JSON-LD-разметка личности и сайта; включать только подтверждённые данные, соответствующие видимому содержанию. Разметка должна следовать [рекомендациям Google по structured data](https://developers.google.com/search/docs/appearance/structured-data/intro-structured-data) и не означает гарантированного расширенного результата.
