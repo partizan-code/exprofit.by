@@ -7,7 +7,7 @@ function initSmoothScroll() {
             if (target) {
                 const headerHeight = document.querySelector('header').offsetHeight;
                 const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - headerHeight;
-                
+
                 window.scrollTo({
                     top: targetPosition,
                     behavior: 'smooth'
@@ -29,7 +29,7 @@ async function sendUTMToTelegram(buttonType) {
         utm_term: urlParams.get('utm_term'),
         utm_content: urlParams.get('utm_content')
     };
-    
+
     try {
         // Используйте вашу ссылку из Google Apps Script
         await fetch('https://script.google.com/macros/s/AKfycbyjm87AdhFjsGdiioe3u8xJiuvnQkVl8D_CBH6VSfyfrtR4xNwelbUawNPDey1k73tmlg/exec', {
@@ -39,7 +39,7 @@ async function sendUTMToTelegram(buttonType) {
     } catch (error) {
         console.log('Ошибка отправки UTM:', error);
     }
-    
+
     return true;
 }
 
@@ -48,34 +48,34 @@ function handleInternalLinks() {
     document.addEventListener('click', function(e) {
         const link = e.target.closest('a');
         if (!link) return;
-        
+
         const href = link.getAttribute('href');
-        
+
         // Обрабатываем только внутренние ссылки
         if (href && (href.startsWith('/') || href.startsWith('#'))) {
             e.preventDefault();
-            
+
             const urlParams = new URLSearchParams(window.location.search);
             const utmParams = urlParams.toString();
-            
+
             let newUrl = href;
-            
+
             // Для якорных ссылок
             if (href.startsWith('#')) {
                 const target = document.querySelector(href);
                 if (target) {
                     const headerHeight = document.querySelector('header').offsetHeight;
                     const targetPosition = target.offsetTop - headerHeight;
-                    
+
                     window.scrollTo({
                         top: targetPosition,
                         behavior: 'smooth'
                     });
-                    
+
                     newUrl = window.location.pathname + (utmParams ? '?' + utmParams : '') + href;
                     window.history.replaceState(null, null, newUrl);
                 }
-            } 
+            }
             // Для ссылок на главную и другие страницы
             else if (href.startsWith('/')) {
                 newUrl = href + (utmParams ? '?' + utmParams : '');
