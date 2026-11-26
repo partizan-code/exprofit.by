@@ -1,6 +1,6 @@
 # ExProfit — Developer Portfolio & Business Automation Website
 
-Русскоязычный статический сайт-портфолио Андрея Коробейникова. Представляет специализацию в Python backend, AI-интеграциях и автоматизации бизнеса, показывает проекты и помогает перейти от знакомства с разработчиком к обсуждению задачи в Telegram. Отдельная [посадочная страница](crm-automation.html) представляет автоматизацию CRM и интеграции на Python для бизнеса в Беларуси.
+Русскоязычный статический сайт-портфолио Андрея Коробейникова. Представляет специализацию в Python backend, AI-интеграциях и автоматизации бизнеса, показывает проекты и помогает перейти от знакомства с разработчиком к обсуждению задачи в Telegram. Отдельная [посадочная страница](crm-automation/index.html) представляет автоматизацию CRM и интеграции на Python для бизнеса в Беларуси.
 
 **Сайт:** [exprofit.by](https://exprofit.by/). Ссылка указывает на целевой публичный адрес; состояние опубликованной версии здесь не подтверждается.
 
@@ -19,12 +19,12 @@
 | Компонент | Ответственность |
 | --- | --- |
 | [index.html](index.html) | Разметка, тексты, ссылки, SEO-метаданные, встроенный SVG favicon и подключение Метрики. |
-| [crm-automation.html](crm-automation.html) | Посадочная CRM-услуги на шаблоне главной с отдельными SEO-метаданными и общими ресурсами. |
+| [crm-automation/index.html](crm-automation/index.html) | Посадочная CRM-услуги на шаблоне главной с отдельными SEO-метаданными и общими ресурсами. |
 | [src/input.css](src/input.css) | Исходник Tailwind CSS, дизайн и адаптивные стили. |
 | [exprofit.css](exprofit.css) | Сгенерированный минимизированный CSS, подключённый в HTML. |
 | [script.js](script.js) | Фильтрация UTM, подготовка внутренних ссылок и отправка события CTA через Fetch API. |
 | [package.json](package.json), [package-lock.json](package-lock.json) | npm-команды и зависимости: Tailwind CSS и `@tailwindcss/cli` версии **4.1.17**. |
-| [tests/script.test.cjs](tests/script.test.cjs) | Тесты JavaScript на встроенном Node.js test runner с подменами DOM и `fetch`. |
+| [tests/script.test.cjs](tests/script.test.cjs) | Тесты UTM и CTA с подменами DOM и `fetch`, проверка путей ресурсов и SEO посадочной на встроенном Node.js test runner. |
 | [robots.txt](robots.txt), [sitemap.xml](sitemap.xml) | Правила обхода и URL обеих страниц в sitemap. |
 
 Браузер получает готовые файлы со статического хостинга. Контактные ссылки ведут в Telegram; Метрика и Google Apps Script являются внешними интеграциями. Исходного кода обработчика Google Apps Script в репозитории нет. Подробности: [аналитика и UTM](docs/ANALYTICS.md).
@@ -59,7 +59,7 @@ npm run build:css
 npm run watch:css
 ```
 
-Тексты, ссылки и метаданные находятся в `index.html` и `crm-automation.html`, поведение — в `script.js`, стили — в `src/input.css`. Сохраняйте согласованный дизайн; после изменения стилей или Tailwind-классов пересобирайте CSS. Новые файлы с классами нужно явно добавлять через `@source`: сейчас сканируются `index.html`, `crm-automation.html` и `script.js`. См. [Tailwind CLI](https://tailwindcss.com/docs/installation/tailwind-cli) и [поиск классов](https://tailwindcss.com/docs/detecting-classes-in-source-files).
+Тексты, ссылки и метаданные находятся в `index.html` и `crm-automation/index.html`, поведение — в `script.js`, стили — в `src/input.css`. Сохраняйте согласованный дизайн; после изменения стилей или Tailwind-классов пересобирайте CSS. Новые файлы с классами нужно явно добавлять через `@source`: сейчас сканируются `index.html`, `crm-automation/index.html` и `script.js`. См. [Tailwind CLI](https://tailwindcss.com/docs/installation/tailwind-cli) и [поиск классов](https://tailwindcss.com/docs/detecting-classes-in-source-files).
 
 ## Локальный просмотр
 
@@ -79,13 +79,13 @@ Windows с Python Launcher:
 py -3 -m http.server 8000 --bind 127.0.0.1
 ```
 
-Откройте [http://127.0.0.1:8000/](http://127.0.0.1:8000/). Для остановки нажмите `Ctrl+C`. Этот сервер предназначен для локального просмотра; параметры описаны в [документации Python](https://docs.python.org/3/library/http.server.html#command-line-interface).
+Откройте [главную](http://127.0.0.1:8000/) или [посадочную CRM](http://127.0.0.1:8000/crm-automation/). Каталог `crm-automation/` содержит `index.html`, поэтому адрес с завершающим слешем работает без rewrite-правил. Для остановки нажмите `Ctrl+C`. Этот сервер предназначен для локального просмотра; параметры описаны в [документации Python](https://docs.python.org/3/library/http.server.html#command-line-interface).
 
 Пример использования: перейдите к разделу «Проекты», откройте описание и ссылку на код выбранного проекта. Контактные CTA «Обсудить задачу» ведут в Telegram; при локальной проверке их внешние переходы должны быть подменены.
 
 ## Проверки
 
-`npm test` запускает семь изолированных тестов UTM и аналитического события; `node --check script.js` проверяет синтаксис. Команды включены в [подготовку и сборку](#подготовка-и-сборка). Браузерные сценарии не входят в `npm test`.
+`npm test` запускает десять изолированных тестов UTM, аналитического события, путей ресурсов и SEO посадочной; `node --check script.js` проверяет синтаксис. Команды включены в [подготовку и сборку](#подготовка-и-сборка). Браузерные сценарии не входят в `npm test`.
 
 [Методика тестирования](docs/TESTING.md) описывает покрытие, безопасную проверку адаптивности, доступности и CTA, а также границы подтверждённых результатов. Локальные тесты не подтверждают доставку production-аналитики.
 
@@ -93,7 +93,7 @@ py -3 -m http.server 8000 --bind 127.0.0.1
 
 Статический сайт реализован; ручное развёртывание и откат описаны в [docs/DEPLOYMENT.md](docs/DEPLOYMENT.md). Публикация требует отдельного разрешения владельца. В репозитории нет настроенного GitHub Actions workflow, автоматического deploy или автоматического версионирования ресурсов.
 
-Canonical и `og:url` соответствуют адресам `https://exprofit.by/` и `https://exprofit.by/crm-automation.html`; sitemap содержит обе страницы, `robots.txt` указывает на него. Обе страницы не содержат `noindex`. Отдельное Open Graph изображение и JSON-LD не добавлены. Состояние хостинга, индексация и работа внешних интеграций не подтверждаются локальными проверками.
+Canonical и `og:url` соответствуют адресам `https://exprofit.by/` и `https://exprofit.by/crm-automation/`; sitemap содержит обе страницы, `robots.txt` указывает на него. Обе страницы не содержат `noindex`. Отдельное Open Graph изображение и JSON-LD не добавлены. Состояние хостинга, индексация и работа внешних интеграций не подтверждаются локальными проверками.
 
 ## Документация
 

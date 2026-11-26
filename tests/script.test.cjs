@@ -14,11 +14,11 @@ function link(href) {
     };
 }
 
-function setup(search = '', fetch = async () => ({}), links = []) {
+function setup(search = '', fetch = async () => ({}), links = [], pathname = '/') {
     const listeners = {};
     const context = vm.createContext({
         URL, URLSearchParams, fetch,
-        window: { location: new URL(`https://exprofit.test/${search}`) },
+        window: { location: new URL(`https://exprofit.test${pathname}${search}`) },
         document: {
             addEventListener(name, handler) { listeners[name] = handler; },
             querySelectorAll() { return links; }
@@ -58,6 +58,51 @@ test('relative, query-only and absolute same-origin links preserve UTM', () => {
         context.preserveUTM(target);
         assert.equal(new URL(target.href).searchParams.get('utm_source'), 'telegram');
     }
+});
+
+test('home and nested CRM landing links preserve five UTM keys on a round trip', () => {
+    const home = fs.readFileSync(path.join(__dirname, '../index.html'), 'utf8');
+    const landing = fs.readFileSync(path.join(__dirname, '../crm-automation/index.html'), 'utf8');
+    const target = link(home.match(/href="([^"]*crm-automation[^"]*)"/)[1]);
+    const query = '?utm_source=local&utm_medium=&utm_campaign=Беларусь&utm_term=a%26b&utm_content=crm&secret=excluded';
+    setup(query).context.preserveUTM(target);
+    const landingURL = new URL(target.href);
+    assert.equal(landingURL.pathname, '/crm-automation/');
+    assert.equal(landingURL.searchParams.has('secret'), false);
+    for (const [key, value] of new URLSearchParams(query)) {
+        if (key !== 'secret') assert.equal(landingURL.searchParams.get(key), value);
+    }
+
+    const brand = link(landing.match(/class="brand" href="([^"]+)"/)[1]);
+    const { context } = setup(landingURL.search, undefined, [], landingURL.pathname);
+    context.preserveUTM(brand);
+    assert.equal(new URL(brand.href).pathname, '/');
+    assert.equal(new URL(brand.href).search, landingURL.search);
+    const destination = link('../?utm_source=own&view=cases#portfolio');
+    context.preserveUTM(destination);
+    const result = new URL(destination.href);
+    assert.equal(result.pathname, '/');
+    assert.equal(result.searchParams.get('utm_source'), 'own');
+    assert.equal(result.searchParams.getAll('utm_campaign').length, 1);
+    assert.equal(result.hash, '#portfolio');
+    assert.equal(result.searchParams.get('view'), 'cases');
+});
+
+test('CRM directory URL maps to its HTML with working shared assets and consistent SEO', () => {
+    const pageURL = new URL('https://exprofit.by/crm-automation/');
+    const html = fs.readFileSync(path.join(__dirname, '..', pageURL.pathname, 'index.html'), 'utf8');
+    const cssURL = new URL(html.match(/rel="stylesheet" href="([^"]+)"/)[1], pageURL);
+    const scriptURL = new URL(html.match(/<script src="([^"]+)"/)[1], pageURL);
+    assert.equal(cssURL.pathname, '/exprofit.css');
+    assert.equal(scriptURL.pathname, '/script.js');
+    for (const asset of [cssURL, scriptURL]) {
+        assert.ok(fs.statSync(path.join(__dirname, '..', asset.pathname)).isFile());
+    }
+    assert.equal(html.match(/rel="canonical" href="([^"]+)"/)[1], pageURL.href);
+    assert.equal(html.match(/property="og:url" content="([^"]+)"/)[1], pageURL.href);
+    const sitemap = fs.readFileSync(path.join(__dirname, '../sitemap.xml'), 'utf8');
+    assert.ok(sitemap.includes(`<loc>${pageURL.href}</loc>`));
+    assert.equal(sitemap.includes('/crm-automation.html'), false);
 });
 
 test('fragments and external links are left to native browser navigation', () => {
@@ -105,4 +150,16 @@ test('analytics failures and unavailable fetch never escape the handler', async 
         const { context } = setup('', fetch);
         await assert.doesNotReject(context.sendUTMToTelegram('Написать в Телеграмм'));
     }
+});
+
+test('analytics keeps the nested landing pathname, allowed UTM and hash', async () => {
+    const requests = [];
+    const { context } = setup('?utm_source=local&secret=excluded#contact', async (...args) => {
+        requests.push(args);
+    }, [], '/crm-automation/');
+    await context.sendUTMToTelegram('Обсудить проект');
+    assert.equal(requests.length, 1);
+    const payload = JSON.parse(requests[0][1].body);
+    assert.equal(payload.url, 'https://exprofit.test/crm-automation/?utm_source=local#contact');
+    assert.equal(payload.utm_source, 'local');
 });

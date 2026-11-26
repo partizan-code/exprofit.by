@@ -1,6 +1,6 @@
 # Аналитика и UTM
 
-Документ описывает фактическое поведение [script.js](../script.js) и подключений в [index.html](../index.html) и [crm-automation.html](../crm-automation.html). Исходного кода Google Apps Script здесь нет; доставка событий внешним сервисам не подтверждена. Безопасный порядок локальных проверок: [TESTING.md](TESTING.md).
+Документ описывает фактическое поведение [script.js](../script.js) и подключений в [index.html](../index.html) и [crm-automation/index.html](../crm-automation/index.html). Исходного кода Google Apps Script здесь нет; доставка событий внешним сервисам не подтверждена. Безопасный порядок локальных проверок: [TESTING.md](TESTING.md).
 
 ## Разрешённые параметры
 

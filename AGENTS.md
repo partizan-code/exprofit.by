@@ -1,7 +1,7 @@
 # Особенности exprofit.by
 
-- Статический сайт: главная `index.html`, посадочная `crm-automation.html`, общий `script.js`, Tailwind CSS 4.1.17. Собственного backend нет. Обзор и команды: [README.md](README.md); техническая навигация: [docs/README.md](docs/README.md).
-- Источник стилей — `src/input.css`. Не редактируйте `exprofit.css` вручную: пересобирайте через `npm run build:css`. Поиск классов ограничен явными `@source` для `index.html`, `crm-automation.html` и `script.js`; новые источники регистрируйте явно.
+- Статический сайт: главная `index.html`, посадочная `crm-automation/index.html` по URL `/crm-automation/`, общий `script.js`, Tailwind CSS 4.1.17. На посадочной общие ресурсы и ссылка на главную используют `../`; сохраняйте завершающий слеш в публичном URL. Собственного backend нет. Обзор и команды: [README.md](README.md); техническая навигация: [docs/README.md](docs/README.md).
+- Источник стилей — `src/input.css`. Не редактируйте `exprofit.css` вручную: пересобирайте через `npm run build:css`. Поиск классов ограничен явными `@source` для `index.html`, `crm-automation/index.html` и `script.js`; новые источники регистрируйте явно.
 - Сохраняйте согласованный тёмный дизайн, адаптивность, sticky header, нативные якоря, skip link, видимый фокус и reduced motion. Изменение дизайна требует отдельного согласования.
 - При изменении UTM и CTA сохраняйте список из пяти разрешённых UTM, приоритет параметров назначения и обычные Telegram-ссылки, не зависящие от аналитики. Формат событий описан в [docs/ANALYTICS.md](docs/ANALYTICS.md).
 - `npm test` использует подмены DOM и `fetch`. При браузерных проверках изолируйте внешние запросы и переходы **до первой загрузки**, включая Метрику, Google Apps Script и Telegram; порядок — в [docs/TESTING.md](docs/TESTING.md). Не отправляйте реальные аналитические события и тестовые уведомления без разрешения на конкретную операцию.

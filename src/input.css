@@ -1,7 +1,7 @@
 @import "tailwindcss" source(none);
 
 @source "../index.html";
-@source "../crm-automation.html";
+@source "../crm-automation/index.html";
 @source "../script.js";
 
 /* Approved prototype styles. Explicit link and list defaults retain its
