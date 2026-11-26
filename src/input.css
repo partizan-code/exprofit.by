@@ -104,9 +104,10 @@ nav a{display:inline-flex;align-items:center;min-height:44px;font-size:.875rem;t
 
 .about{display:grid;grid-template-columns:.8fr 1.4fr;gap:64px}
 .about h2{max-width:15ch}
-.author-photo{display:block;width:96px;height:96px;margin-top:24px;aspect-ratio:1;object-fit:cover;object-position:center;border-radius:0}
-.about-copy p{color:var(--muted);margin-bottom:20px}
-.about-copy p:first-child{color:var(--text);font-size:1.25rem;line-height:1.6}
+.about-intro{display:grid;grid-template-columns:220px minmax(0,1fr);align-items:center;gap:24px;margin-bottom:24px}
+.author-photo{display:block;width:100%;max-width:100%;height:auto;border-radius:8px}
+.about-copy p{max-width:none;color:var(--muted);margin-bottom:20px}
+.about-intro p{color:var(--text);font-size:1.25rem;line-height:1.6;margin-bottom:0}
 .about .project-link{margin-top:0}
 .steps{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:28px;list-style:decimal inside;padding:0;margin:0}
 .steps li{padding-top:20px;border-top:1px solid #62738b;font-size:.875rem;color:var(--accent);font-family:var(--mono)}
@@ -132,6 +133,7 @@ footer{padding-block:28px;color:var(--muted)}
 .project-featured{gap:28px;padding:28px}
 .project-pair{gap:20px}
 .project-card{padding:28px}
+.about-intro{grid-template-columns:clamp(8rem,16vw,12.5rem) minmax(0,1fr)}
 .steps{grid-template-columns:repeat(2,minmax(0,1fr))}
 }
 
@@ -142,7 +144,6 @@ footer{padding-block:28px;color:var(--muted)}
 nav{order:3;width:100%;margin-left:0;justify-content:space-between;gap:12px}
 .hero{padding-top:24px;padding-bottom:32px}
 .hero-topline{display:block;margin-bottom:18px}
-.author-photo{width:64px;height:64px}
 .position{display:none}
 .hero h1{font-size:clamp(2.125rem,1.25rem + 3vw,3.25rem)}
 .hero-bottom{gap:20px;margin-top:22px}
@@ -164,8 +165,10 @@ nav{order:3;width:100%;margin-left:0;justify-content:space-between;gap:12px}
 .project-row{grid-template-columns:1fr;gap:18px}
 .project-row .project-link{margin-top:4px}
 .project-row .project-copy{max-width:65ch}
-.about{grid-template-columns:1fr;gap:28px}
+.about{grid-template-columns:1fr;gap:24px}
 .about h2{max-width:24ch}
+.about-intro{grid-template-columns:1fr;align-items:start;gap:20px;margin-bottom:20px}
+.author-photo{width:160px}
 .steps{grid-template-columns:repeat(2,minmax(0,1fr));gap:24px}
 .contact-section{padding-block:48px}
 .contact-inner{display:block}

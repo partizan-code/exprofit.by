@@ -100,8 +100,8 @@ test('CRM directory URL maps to its HTML with working assets, neutral SEO and he
     }
     assert.equal(html.match(/rel="canonical" href="([^"]+)"/)[1], pageURL.href);
     assert.equal(html.match(/property="og:url" content="([^"]+)"/)[1], pageURL.href);
-    const title = 'Автоматизация CRM и интеграции на Python | ExProfit';
-    const description = 'Связываю CRM с внешними сервисами на Python: обмен данными, выгрузки и уведомления для бизнеса. Обсудите задачу с Андреем Коробейниковым в Telegram.';
+    const title = 'Автоматизация CRM и интеграции на Python';
+    const description = 'Связываю CRM с внешними сервисами на Python: обмен данными, выгрузки и уведомления для бизнеса. Обсудите задачу с Андреем в Telegram.';
     assert.equal(html.match(/<title>([^<]+)<\/title>/)[1], title);
     assert.equal(html.match(/property="og:title" content="([^"]+)"/)[1], title);
     assert.equal(html.match(/name="description" content="([^"]+)"/)[1], description);
@@ -109,12 +109,12 @@ test('CRM directory URL maps to its HTML with working assets, neutral SEO and he
     assert.equal(html.match(/name="twitter:card" content="([^"]+)"/)[1], 'summary_large_image');
     assert.equal(html.match(/name="twitter:title" content="([^"]+)"/)[1], title);
     assert.equal(html.match(/name="twitter:description" content="([^"]+)"/)[1], description);
-    const imageURL = 'https://exprofit.by/assets/images/crm-automation-og.jpg';
+    const imageURL = 'https://exprofit.by/assets/images/crm-automation-og.png';
     assert.equal(html.match(/property="og:image" content="([^"]+)"/)[1], imageURL);
     assert.equal(html.match(/name="twitter:image" content="([^"]+)"/)[1], imageURL);
-    assert.equal(html.match(/property="og:image:type" content="([^"]+)"/)[1], 'image/jpeg');
-    assert.equal(html.match(/property="og:image:width" content="([^"]+)"/)[1], '1200');
-    assert.equal(html.match(/property="og:image:height" content="([^"]+)"/)[1], '630');
+    assert.equal(html.match(/property="og:image:type" content="([^"]+)"/)[1], 'image/png');
+    assert.equal(html.match(/property="og:image:width" content="([^"]+)"/)[1], '1732');
+    assert.equal(html.match(/property="og:image:height" content="([^"]+)"/)[1], '908');
     const imageAlt = html.match(/property="og:image:alt" content="([^"]+)"/)[1];
     assert.ok(imageAlt.includes('Андрея Коробейникова'));
     assert.equal(html.match(/name="twitter:image:alt" content="([^"]+)"/)[1], imageAlt);
