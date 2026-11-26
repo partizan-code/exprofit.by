@@ -4,8 +4,8 @@
   "private": true,
   "description": "Static ExProfit.by portfolio website",
   "scripts": {
-    "build:css": "tailwindcss -i ./src/input.css -o ./output.css --minify",
-    "watch:css": "tailwindcss -i ./src/input.css -o ./output.css --watch",
+    "build:css": "tailwindcss -i ./src/input.css -o ./exprofit.css --minify",
+    "watch:css": "tailwindcss -i ./src/input.css -o ./exprofit.css --watch",
     "test": "node --test"
   },
   "engines": {
